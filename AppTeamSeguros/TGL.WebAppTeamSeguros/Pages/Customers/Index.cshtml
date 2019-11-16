@@ -1,0 +1,59 @@
+﻿@page
+@model TGL.WebAppTeamSeguros.Pages.Customers.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+}
+
+<nav>
+    <div class="nav-wrapper bg-dark">
+        <a class="brand-logo center">List of Customers</a>
+    </div>
+</nav>
+
+<br />
+<br />
+
+<form method="post">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name           </th>
+                <th scope="col">Last Name  </th>
+                <th scope="col">Document Type           </th>
+                <th scope="col">Number Document            </th>
+                <th scope="col">Birthday            </th>
+                <th scope="col">City            </th>
+                <th scope="col" colspan="2"><center>Acciones</center></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
+            <tr>
+                <td>@customer.Name       </td>
+                <td>@customer.LastName        </td>
+                <td>@customer.TypeDoc        </td>
+                <td>@customer.NumDoc      </td>
+                <td>@customer.Birthday.ToString("dd/MM/yyyy")     </td>
+                <td>@customer.City       </td>
+                <td>
+                    <a role="button" class="btn btn-outline-primary"
+                       asp-page="Edit"
+                       asp-route-id="@customer.Id"> Edit</a>
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger" type="submit"
+                            asp-page-handler="delete"
+                            asp-route-id="@customer.Id">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            }
+
+
+        </tbody>
+
+    </table>
+</form>
