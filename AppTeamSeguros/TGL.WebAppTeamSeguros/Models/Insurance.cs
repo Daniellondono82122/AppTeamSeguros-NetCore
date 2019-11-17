@@ -13,7 +13,7 @@ namespace TGL.WebAppTeamSeguros.Models
         {
             Id = Guid.NewGuid();
             DateExp = DateTime.Now;
-            DueDate = DateExp.AddDays(360);
+            DueDate = DateExp.AddYears(1);
             Cost = 1000000;
             //Increase = GetIncrease(CustomerStore.GetCustomerById(CustomerId).Age,
             //CustomerStore.GetCustomerById(CustomerId).City, Year);
