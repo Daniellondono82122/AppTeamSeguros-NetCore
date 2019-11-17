@@ -10,6 +10,7 @@ namespace TGL.WebAppTeamSeguros.Data
     {
         
         public Context Context { get; set; }
+  
         public VehicleStore(Context context)
         {
             Context = context;
@@ -22,7 +23,7 @@ namespace TGL.WebAppTeamSeguros.Data
                 x => x.Id == id
                 );
         }
-
+               
         internal void AddVehicle(Vehicle vehicle)
         {
             Context.Vehicle.Add(vehicle);
@@ -40,7 +41,8 @@ namespace TGL.WebAppTeamSeguros.Data
 
         public List<Vehicle> GetVehicles()
         {
-            return Context.Vehicle.ToList();
+            var b= Context.Vehicle.ToList();
+            return b;
         }
         
     }

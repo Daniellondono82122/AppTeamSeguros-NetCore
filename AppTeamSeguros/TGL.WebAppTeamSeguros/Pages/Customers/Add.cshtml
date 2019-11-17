@@ -30,7 +30,7 @@
                 <label for="doctype" class="">Document Type</label>
                 <br /><br /><br />
                 <div>
-                    <select class="browser-default" asp-for="Customer.TypeDoc" asp-items="Html.GetEnumSelectList<@Models.typeDoc>()">
+                    <select class="browser-default" asp-for="Customer.TypeDoc" asp-items="Html.GetEnumSelectList<@Models.TypeDoc>()">
                         <option value="" disabled selected>Choose</option>
                     </select>
                 </div>
@@ -47,10 +47,12 @@
                 <label>Birthdate</label>
                 <br /><br /><br />
                 <div>
-                    <input class=""  asp-for="Customer.Birthday" />
+                    <input type="date" id="dob" class="date" asp-for="Customer.Birthday" />
+
                 </div>
+
             </div>
-            </div>
+        </div>
         <div class="row">
             <div class="input-field col s12">
                 <label for="city" class="">City</label>
@@ -64,3 +66,19 @@
     </form>
 </div>
 <br />
+<script>
+    $(function () {
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;// jan=0; feb=1 .......
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear() - 16;
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+        var minDate = year + '-' + month + '-' + day;
+        var maxDate = year + '-' + month + '-' + day;
+        $('#dob').attr('max', maxDate);
+
+    });
+</script>

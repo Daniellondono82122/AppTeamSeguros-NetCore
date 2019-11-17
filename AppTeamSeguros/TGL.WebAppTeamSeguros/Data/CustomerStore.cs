@@ -22,6 +22,20 @@ namespace TGL.WebAppTeamSeguros.Data
                 );
         }
 
+        public string GetNameById(Guid id)
+        {
+            return Context.Customer.FirstOrDefault(
+                x => x.Id == id
+                ).Name;
+        }
+
+        public string GetLastNameById(Guid id)
+        {
+            return Context.Customer.FirstOrDefault(
+                x => x.Id == id
+                ).LastName;
+        }
+
         internal void EditCustomer(Customer customer)
         {
             var currentCustomer = GetCustomerById(customer.Id);

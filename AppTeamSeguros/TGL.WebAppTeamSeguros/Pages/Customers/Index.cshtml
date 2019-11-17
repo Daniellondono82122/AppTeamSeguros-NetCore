@@ -23,7 +23,7 @@
                 <th scope="col">Number Document            </th>
                 <th scope="col">Birthday            </th>
                 <th scope="col">City            </th>
-                <th scope="col" colspan="2"><center>Acciones</center></th>
+                <th scope="col" colspan="3"><center>Acciones</center></th>
 
             </tr>
         </thead>
@@ -48,6 +48,11 @@
                             asp-route-id="@customer.Id">
                         Delete
                     </button>
+                </td>
+                <td>
+                    <a role="button" class="btn btn-outline-primary"
+                       asp-page="../Vehicles/Index"
+                       asp-route-customerid="@customer.Id"><i class="material-icons">directions_car</i></a>
                 </td>
             </tr>
             }

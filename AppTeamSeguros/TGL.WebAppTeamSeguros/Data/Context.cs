@@ -11,7 +11,7 @@ namespace TGL.WebAppTeamSeguros.Data
     {
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Vehicle> Vehicle { get; set; }
-        //public DbSet<Insurance> Insurance { get; set; }
+        public DbSet<Insurance> Insurance { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options)
         {

@@ -46,6 +46,24 @@ namespace TGL.WebAppTeamSeguros.Migrations
                     b.ToTable("Customer");
                 });
 
+            modelBuilder.Entity("TGL.WebAppTeamSeguros.Models.Insurance", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("Cost");
+
+                    b.Property<DateTime>("DateExp");
+
+                    b.Property<DateTime>("DueDate");
+
+                    b.Property<double>("Increase");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Insurance");
+                });
+
             modelBuilder.Entity("TGL.WebAppTeamSeguros.Models.Vehicle", b =>
                 {
                     b.Property<Guid>("Id")
@@ -56,6 +74,8 @@ namespace TGL.WebAppTeamSeguros.Migrations
 
                     b.Property<Guid>("CustomerId");
 
+                    b.Property<Guid?>("InsuranceId");
+
                     b.Property<string>("Model")
                         .IsRequired();
 
@@ -64,6 +84,8 @@ namespace TGL.WebAppTeamSeguros.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("InsuranceId");
 
                     b.ToTable("Vehicle");
                 });
@@ -74,6 +96,10 @@ namespace TGL.WebAppTeamSeguros.Migrations
                         .WithMany("Vehicles")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TGL.WebAppTeamSeguros.Models.Insurance", "Insurance")
+                        .WithMany()
+                        .HasForeignKey("InsuranceId");
                 });
 #pragma warning restore 612, 618
         }

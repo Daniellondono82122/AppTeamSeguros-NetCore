@@ -1,8 +1,10 @@
 ﻿@page
-@model TGL.WebAppTeamSeguros.Pages.Vehicles.IndexModel
+@model TGL.WebAppTeamSeguros.Pages.Insurances.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+    ViewData["Title"] = "index";
 }
+
 <nav>
     <div class="nav-wrapper bg-dark">
         <a class="brand-logo center">List of Vehicles</a>
@@ -11,28 +13,34 @@
 
 <br />
 <br />
-<a asp-page="Add" role="button" class="btn btn-success"
-   asp-route-customerid="@Model.Customerid"> Add Vehicle</a>
-<br />
-<br />
 <form method="post">
     <table class="table">
         <thead class="thead-dark">
             <tr>
+                <th scope="col">Owner               </th>
                 <th scope="col">Brand               </th>
                 <th scope="col">Model               </th>
                 <th scope="col">Year                </th>
+                <th scope="col">Cost Insecure       </th>
+                <th scope="col">DateExp Insecure    </th>
+                <th scope="col">DueDate Insecure    </th>
                 <th scope="col">Acciones            </th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach (var vehicle in Model.VehiclesByCostumerId)
+            @foreach (var vehicle in Model.Vehicles)
             {
                 <tr>
+                    <td>
+                        nombre apellido
+                    </td>
                     <td>@vehicle.Brand        </td>
                     <td>@vehicle.Model        </td>
                     <td>@vehicle.Year      </td>
+                    <td> Models.Insurance.Increase</td>
+                    <td> Models.Insurance.DateExp</td>
+                    <td> Models.Insurance.DueDate</td>
                     <td>
                         <button class="btn btn-outline-danger" type="submit"
                                 asp-page-handler="delete"
@@ -47,4 +55,3 @@
 
     </table>
 </form>
-<a asp-page="../Customers/Index">Return to list</a>

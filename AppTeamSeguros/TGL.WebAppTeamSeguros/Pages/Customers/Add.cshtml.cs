@@ -31,10 +31,25 @@ namespace TGL.WebAppTeamSeguros.Pages.Customers
             {
                 return Page();
             }
-            //Add
-            CustomerStore.AddCustomer(Customer);
-            return RedirectToPage("../Vehicles/Add","CustomerId", new { CustomerId = Customer.Id });
-         
+            try
+
+            {
+
+                CustomerStore.AddCustomer(Customer);
+
+            }
+
+            catch (Exception e)
+
+            {
+
+                return Page(); //return popup with error message
+
+            }
+
+            return RedirectToPage("../Vehicles/Add", "CustomerId", new { CustomerId = Customer.Id });
+
+
         }
 
     }

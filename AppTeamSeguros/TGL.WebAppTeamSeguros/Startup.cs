@@ -37,7 +37,7 @@ namespace TGL.WebAppTeamSeguros
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<CustomerStore>();
             services.AddScoped<VehicleStore>();
-            //services.AddScoped<InsuranceStore>();
+            services.AddScoped<InsuranceStore>();
             services.AddDbContext<Context>(
                 opt=> opt.UseSqlServer(Configuration.GetConnectionString("TglSQL"))
                 );

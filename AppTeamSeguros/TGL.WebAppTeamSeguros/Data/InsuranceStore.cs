@@ -7,8 +7,7 @@ using TGL.WebAppTeamSeguros.Models;
 namespace TGL.WebAppTeamSeguros.Data
 {
     public class InsuranceStore
-    {
-        /*
+    { 
         public Context Context { get; set; }
         public InsuranceStore(Context context)
         {
@@ -42,6 +41,5 @@ namespace TGL.WebAppTeamSeguros.Data
         {
             return Context.Insurance.ToList();
         }
-        */
     }
 }
