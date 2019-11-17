@@ -13,22 +13,31 @@ namespace TGL.WebAppTeamSeguros.Pages.Insurances
     {
         public VehicleStore VehicleStore { get; set; }
         public CustomerStore CustomerStore { get; set; }
-        public InsuranceStore InsuranceStore { get; set; }
-
         public List<Vehicle> Vehicles { get; set; }
         public List<Customer> Customers { get; set; }
-        public List<Insurance> Insurances { get; set; }
-        //public List<String> View { get; set; }
 
-        public IndexModel()
+        public Customer Customer { get; set; }
+        public Vehicle Vehicle { get; set; }
+        public Insurance Insurance { get; set; }
+
+
+
+        public IndexModel(VehicleStore vehicleStore, CustomerStore customerStore)
         {
+            VehicleStore = vehicleStore;
+            CustomerStore = customerStore;
+
+
+            Customer = new Customer();
+            Vehicle = new Vehicle();
+            Insurance = new Insurance();
+
+            Customers = new List<Customer>();
+            Vehicles = new List<Vehicle>();
+
             Vehicles = VehicleStore.GetVehicles();
-            Insurances = InsuranceStore.GetInsurances();
             Customers = CustomerStore.GetCustomers();
-            //View = new List<String>();
         }
-
-
         public IActionResult OnPostDelete(Guid id)
         {
             VehicleStore.DeleteVehicle(id);

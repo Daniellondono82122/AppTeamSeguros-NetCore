@@ -34,7 +34,9 @@ namespace TGL.WebAppTeamSeguros.Pages.Customers
             try
 
             {
-
+                int age = DateTime.Now.Year - Customer.Birthday.Year;
+                if (DateTime.Now < Customer.Birthday.AddYears(age)) age--;
+                Customer.Age = age;
                 CustomerStore.AddCustomer(Customer);
 
             }
@@ -42,7 +44,7 @@ namespace TGL.WebAppTeamSeguros.Pages.Customers
             catch (Exception e)
 
             {
-
+                e.ToString();
                 return Page(); //return popup with error message
 
             }

@@ -13,10 +13,13 @@ namespace TGL.WebAppTeamSeguros.Pages.Vehicles
     {
         public VehicleStore VehicleStore { get; set; }
         public CustomerStore CustomerStore { get; set; }
-        public Customer Customer { get; set; }
-        public AddModel(VehicleStore vehicleStore)
+        public List<Customer> Customers { get; set; }
+        public AddModel(VehicleStore vehicleStore, CustomerStore customerStore)
         {
             VehicleStore = vehicleStore;
+            CustomerStore = customerStore;
+            Customers = new List<Customer>();
+            Customers = CustomerStore.GetCustomers();
         }
 
         [BindProperty]
@@ -45,8 +48,8 @@ namespace TGL.WebAppTeamSeguros.Pages.Vehicles
             double increase;
             //Add
             Vehicle.CustomerId = CustomerId;
-            Customer = CustomerStore.GetCustomerById(CustomerId);
-            increase=Vehicle.Insurance.GetIncrease(Customer.Age,Customer.City,Vehicle.Year);
+            var customer = Customers.FirstOrDefault(x => x.Id == CustomerId);
+            increase=Vehicle.Insurance.GetIncrease(customer.Age,customer.City,Vehicle.Year);
             Vehicle.Insurance.Increase=increase;
             VehicleStore.AddVehicle(Vehicle);
             return RedirectToPage("./Index", "CustomerId", new { CustomerId = CustomerId });

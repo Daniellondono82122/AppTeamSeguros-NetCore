@@ -12,10 +12,12 @@ namespace TGL.WebAppTeamSeguros.Models
         public Insurance()
         {
             Id = Guid.NewGuid();
-            Cost = 1000000;
             DateExp = DateTime.Now;
             DueDate = DateExp.AddDays(360);
-            //Increase = GetIncrease(customer.Age, customer.City, Cost, vehicle.Year);
+            Cost = 1000000;
+            //Increase = GetIncrease(CustomerStore.GetCustomerById(CustomerId).Age,
+            //CustomerStore.GetCustomerById(CustomerId).City, Year);
+            //Cost = +Increase;
         }
 
         public Guid Id { get; set; }
@@ -28,12 +30,14 @@ namespace TGL.WebAppTeamSeguros.Models
 
         public double GetIncrease(int CustomerAge, string CustomerCity, int VehicleYear)
         {
+            Cost = 1000000;
             double increaseMed = 0;
             double increaseYear = 0;
             double increase = 0;
+            //double tot = 0;
             int year = DateTime.Now.Year- VehicleYear;
 
-            if (CustomerCity == "Medellín")
+            if (CustomerCity == "Medellin")
             {
                 increaseMed = Cost * 0.1;
             }
@@ -50,9 +54,10 @@ namespace TGL.WebAppTeamSeguros.Models
             } else if (CustomerAge <= 40)
                 {
                     increase = Cost * 0.1;
-                }
-
-            return increase + increaseMed + increaseYear;
+                } 
+            var tot= increase + increaseMed + increaseYear;
+            Cost += tot;
+            return tot;
         }
     }
 }

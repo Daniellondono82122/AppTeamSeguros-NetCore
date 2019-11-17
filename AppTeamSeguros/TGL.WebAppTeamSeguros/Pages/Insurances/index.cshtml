@@ -3,55 +3,95 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "index";
+    double Cottot;
+
+
+    var vehicles = from v in Model.VehicleStore.GetVehicles()
+                   join c in Model.CustomerStore.GetCustomers() on v.CustomerId equals c.Id
+                   select new
+                   {
+                       v.Id,
+                       c.Name,
+                       c.LastName,
+                       c.TypeDoc,
+                       c.NumDoc,
+                       c.Age,
+                       c.City,
+                       v.Brand,
+                       v.Model,
+                       v.Year,
+                       v.Insurance.Cost,
+                       v.Insurance.DateExp,
+                       v.Insurance.DueDate
+                   };
 }
 
-<nav>
+    <nav class="center-align">
     <div class="nav-wrapper bg-dark">
         <a class="brand-logo center">List of Vehicles</a>
     </div>
 </nav>
+        
 
-<br />
-<br />
-<form method="post">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Owner               </th>
-                <th scope="col">Brand               </th>
-                <th scope="col">Model               </th>
-                <th scope="col">Year                </th>
-                <th scope="col">Cost Insecure       </th>
-                <th scope="col">DateExp Insecure    </th>
-                <th scope="col">DueDate Insecure    </th>
-                <th scope="col">Acciones            </th>
-            </tr>
-        </thead>
-        <tbody>
+        <br />
+        <br />
+        <form method="post">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" colspan="2">Owner               </th>
+                        <th scope="col">Type Document       </th>
+                        <th scope="col">Number Document     </th>
+                        <th scope="col">Brand               </th>
+                        <th scope="col">Model               </th>
+                        <th scope="col">Year                </th>
+                        <th scope="col">Cost Insecure       </th>
+                        <th scope="col">DateExp Insecure    </th>
+                        <th scope="col">DueDate Insecure    </th>
+                        <th scope="col">Acciones            </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vehicle in vehicles)
+                    {
+                        Cottot = 0;
+                        Cottot = vehicle.Cost + Model.Insurance.GetIncrease(vehicle.Age, vehicle.City, vehicle.Year);
+                        <tr>
+                            <td>@vehicle.Name                               </td>
+                            <td>@vehicle.LastName                           </td>
+                            <td>@vehicle.TypeDoc                            </td>
+                            <td>@vehicle.NumDoc                             </td>
+                            <td>@vehicle.Brand                              </td>
+                            <td>@vehicle.Model                              </td>
+                            <td>@vehicle.Year                               </td>
+                            <td>
+                                <span class="currency-usd">@Cottot</span>
+                            </td>
+                            <td>@vehicle.DateExp.ToString("dd/MM/yyyy")     </td>
+                            <td>@vehicle.DueDate.ToString("dd/MM/yyyy")     </td>
+                            <td>
+                                <button class="btn btn-outline-danger" type="submit"
+                                        asp-page-handler="delete"
+                                        asp-route-id="@vehicle.Id">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    }
 
-            @foreach (var vehicle in Model.Vehicles)
-            {
-                <tr>
-                    <td>
-                        nombre apellido
-                    </td>
-                    <td>@vehicle.Brand        </td>
-                    <td>@vehicle.Model        </td>
-                    <td>@vehicle.Year      </td>
-                    <td> Models.Insurance.Increase</td>
-                    <td> Models.Insurance.DateExp</td>
-                    <td> Models.Insurance.DueDate</td>
-                    <td>
-                        <button class="btn btn-outline-danger" type="submit"
-                                asp-page-handler="delete"
-                                asp-route-id="@vehicle.Id">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-            }
+                </tbody>
 
-        </tbody>
+            </table>
+        </form>
 
-    </table>
-</form>
+        
+        <script type="text/javascript">
+            $('.currency-usd').each(function () {
+                var monetary_value = $(this).text();
+                var i = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                }).format(monetary_value);
+                $(this).text(i);
+            });
+        </script>

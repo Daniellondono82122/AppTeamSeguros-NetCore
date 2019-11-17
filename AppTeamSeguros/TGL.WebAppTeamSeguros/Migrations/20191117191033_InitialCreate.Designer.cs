@@ -10,7 +10,7 @@ using TGL.WebAppTeamSeguros.Data;
 namespace TGL.WebAppTeamSeguros.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191117025711_InitialCreate")]
+    [Migration("20191117191033_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
